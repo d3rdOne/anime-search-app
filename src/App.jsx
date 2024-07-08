@@ -1,14 +1,13 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
-import AnimeDetails from "./pages/AnimeDetails";
-import ThemeButton from "./components/ThemeButton";
-import { useSelector } from "react-redux";
+import Details from "./pages/Details";
+// import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import Header from "./components/Header";
 
 function App() {
-  const theme = useSelector((state) => state.animeSearch.theme);
+  // const theme = useSelector((state) => state.animeSearch.theme);
   return (
     <>
       <motion.div
@@ -19,7 +18,8 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Home />}></Route>
-            <Route path="/anime/:id" element={<AnimeDetails />}></Route>
+            <Route path="/anime/:id" element={<Details />}></Route>
+            <Route path="/manga/:id" element={<Details />}></Route>
           </Routes>
         </BrowserRouter>
 
