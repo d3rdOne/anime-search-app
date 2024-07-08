@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import animeSearchReducer from '../slice/animeSlice';
 import { animeApi } from "../slice/animeAPISlice";
+import { setupListeners } from "@reduxjs/toolkit/query";
 
 
 
@@ -14,3 +15,5 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(animeApi.middleware),
 })
+
+setupListeners(store.dispatch);

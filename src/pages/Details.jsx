@@ -5,10 +5,12 @@ import RelatedEntries from "../components/RelatedEntries";
 import Accordion from "../components/Accordion";
 import { useGetAnimeDetailQuery } from "../slice/animeAPISlice";
 import { isNull } from "lodash";
+import AnimeImages from "../components/AnimeImages";
 
-const AnimeDetails = () => {
+const Details = () => {
   const STAR_RATING_COUNT = 5;
   const anime = useParams();
+
   const { data, isLoading } = useGetAnimeDetailQuery(anime.id);
   const [details, setDetails] = useState(null);
 
@@ -84,9 +86,6 @@ const AnimeDetails = () => {
                       {getStarRating(details["score"])}
                     </div>
                     {/* Synopsis */}
-                    {/* <p className="font-semibold text-lg tracking-wider w-full text-left border-b-[1px] py-1 text-black dark:text-gray-50">
-                      Synopsis
-                    </p> */}
                     <Accordion
                       title="Synopsis"
                       className={
@@ -100,23 +99,22 @@ const AnimeDetails = () => {
                     </Accordion>
 
                     {/* Background */}
-                    {/* <p className="font-semibold text-lg tracking-wider w-full text-left border-b-[1px] py-1 text-black dark:text-gray-50 mt-4">
-                      Background
-                    </p> */}
                     <Accordion
                       title="Background"
                       className={
                         " text-lg tracking-wider w-full py-1 text-black dark:text-gray-50 mt-4"
                       }
                     >
-                      <p className="text-sm sm:text-sm tracking-wide min-h-16 overflow-auto text-left text-black dark:text-gray-100 mt-2 whitespace-pre-line">
+                      <p className="text-sm sm:text-sm tracking-wide min-h-4 overflow-auto text-left text-black dark:text-gray-100 mt-2 whitespace-pre-line">
                         {" "}
                         {details["background"] || "Not Available"}
                       </p>
                     </Accordion>
 
                     {/* Related Entries */}
-
+                    <Accordion title="Images">
+                      <AnimeImages id={anime.id}></AnimeImages>
+                    </Accordion>
                     <Accordion
                       title="Related Entries"
                       className={
@@ -136,4 +134,4 @@ const AnimeDetails = () => {
   );
 };
 
-export default AnimeDetails;
+export default Details;
