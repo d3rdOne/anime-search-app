@@ -1,0 +1,139 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import StarRating from "../components/StarRating";
+import RelatedEntries from "../components/RelatedEntries";
+import Accordion from "../components/Accordion";
+import { useGetAnimeDetailQuery } from "../slice/animeAPISlice";
+import { isNull } from "lodash";
+
+const AnimeDetails = () => {
+  const STAR_RATING_COUNT = 5;
+  const anime = useParams();
+  const { data, isLoading } = useGetAnimeDetailQuery(anime.id);
+  const [details, setDetails] = useState(null);
+
+  useEffect(() => {
+    if (data?.data) {
+      setDetails(data.data);
+    }
+  }, [data]);
+
+  const getStarRating = (score) => {
+    let stars = [];
+    for (let i = 0; i < STAR_RATING_COUNT; i++) {
+      stars.push(
+        i + 1 <= Math.floor(score / 2)
+          ? " text-pink-600 dark:text-yellow-300"
+          : " text-gray-500 dark:text-gray-300"
+      );
+    }
+    return stars.map((star, index) => {
+      return <StarRating key={index} className={star} />;
+    });
+  };
+  return (
+    <div className="w-full  h-full  bg-gray-100 dark:bg-indigo-950 relative">
+      <div className="h-full sm:max-w-screen-xl mx-auto  bg-gray-100 dark:bg-indigo-950  text-black dark:text-gray-100 relative">
+        <div className=" text-black dark:text-gray-50 tracking-wide text-2xl">
+          {/* <Link to="/" className="font-semibold">
+            {" "}
+            HOME
+          </Link> */}
+        </div>
+        <div className="mt-4 p-4 min-h-svh">
+          {isLoading && (
+            <>
+              <div className="text-3xl animate-bounce flex justify-center items-center">
+                Loading Details...
+              </div>
+            </>
+          )}
+
+          {!isLoading && !isNull(details) && (
+            <>
+              <div className="text-2xl w-full">
+                {/* Details */}
+                <div className="flex flex-col md:flex-row gap-2 md:gap-4 ">
+                  <div className="left flex flex-col items-center md:place-self-start">
+                    <div className="h-full w-80 px-4 sm:px-0">
+                      <img
+                        src={details["images"]["jpg"]["large_image_url"]}
+                        alt=""
+                        className="object-cover w-full h-full"
+                      />
+                      <div className=" flex flex-wrap justify-center md:justify-start gap-2 mt-4">
+                        {details["genres"].map((genre) => (
+                          <div
+                            key={genre["mal_id"]}
+                            className="genre text-xs px-2  font-default border-2 dark:border-gray-500 dark:bg-gray-500 text-black dark:text-gray-50 rounded-lg"
+                          >
+                            {genre["name"]}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="right min-h-svh max-h-full flex-col mt-4 md:mt-0 text-center md:text-left px-0 md:px-4">
+                    <h3 className="text-3xl tracking-wide">
+                      {details["title"]}{" "}
+                      <span className="text-lg bg-yellow-500 dark:bg-yellow-300 text-black px-3 rounded-xl">
+                        {details["type"]}
+                      </span>{" "}
+                    </h3>
+                    <div className="flex justify-center md:justify-start gap-1 my-2">
+                      {getStarRating(details["score"])}
+                    </div>
+                    {/* Synopsis */}
+                    {/* <p className="font-semibold text-lg tracking-wider w-full text-left border-b-[1px] py-1 text-black dark:text-gray-50">
+                      Synopsis
+                    </p> */}
+                    <Accordion
+                      title="Synopsis"
+                      className={
+                        " text-lg tracking-wider w-full py-1 text-black dark:text-gray-50 mt-4"
+                      }
+                    >
+                      <p className="text-sm sm:text-sm tracking-wide overflow-auto text-left text-black dark:text-gray-100 mt-2 whitespace-pre-line">
+                        {" "}
+                        {details["synopsis"] || "Not Available"}
+                      </p>
+                    </Accordion>
+
+                    {/* Background */}
+                    {/* <p className="font-semibold text-lg tracking-wider w-full text-left border-b-[1px] py-1 text-black dark:text-gray-50 mt-4">
+                      Background
+                    </p> */}
+                    <Accordion
+                      title="Background"
+                      className={
+                        " text-lg tracking-wider w-full py-1 text-black dark:text-gray-50 mt-4"
+                      }
+                    >
+                      <p className="text-sm sm:text-sm tracking-wide min-h-16 overflow-auto text-left text-black dark:text-gray-100 mt-2 whitespace-pre-line">
+                        {" "}
+                        {details["background"] || "Not Available"}
+                      </p>
+                    </Accordion>
+
+                    {/* Related Entries */}
+
+                    <Accordion
+                      title="Related Entries"
+                      className={
+                        "font-medium text-lg tracking-wider w-full py-1 text-black dark:text-gray-50 mt-4"
+                      }
+                    >
+                      <RelatedEntries animeId={anime.id} />
+                    </Accordion>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AnimeDetails;
