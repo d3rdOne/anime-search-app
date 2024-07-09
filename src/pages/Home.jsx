@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Search from "../components/Search";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import AnimeList from "../components/AnimeList";
 import { useDebounce } from "../customHooks/useDebounce";
 import Paginator from "../components/Paginator";
+import { saveTitle, setCurrentPage, setPageCount } from "../slice/animeSlice";
+import { useLazyGetAnimeListQuery } from "../slice/animeAPISlice";
 
 const Home = () => {
   const DEBOUNCE_TIME_MS = 600;
@@ -13,14 +15,41 @@ const Home = () => {
   const currentPage = useSelector((state) => state.animeSearch.currentPage);
   const [searchTitle, setSearchTitle] = useState(animeTitle);
   const debouncedSearchTitle = useDebounce(searchTitle, DEBOUNCE_TIME_MS);
-  const [page, setPage] = useState(currentPage);
+
+  const [trigger, { data: animeList, isLoading, isFetching }] =
+    useLazyGetAnimeListQuery();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(saveTitle(debouncedSearchTitle));
+    trigger({ title: debouncedSearchTitle, page: 1 }, true);
+    dispatch(setCurrentPage(1));
+  }, [debouncedSearchTitle, dispatch, trigger]);
+
+  useEffect(() => {
+    trigger({ title: animeTitle, page: currentPage }, true);
+    dispatch(setCurrentPage(currentPage));
+  }, [currentPage, animeTitle, trigger, dispatch]);
+
+  useEffect(() => {
+    if (animeList?.pagination) {
+      let count = Math.ceil(
+        animeList["pagination"]["items"]["total"] /
+          animeList["pagination"]["items"]["per_page"]
+      );
+      dispatch(setPageCount(count));
+    }
+  }, [animeList, dispatch]);
 
   const handleSearch = (value) => {
     setSearchTitle(value);
   };
 
   const handleSelectPage = (value) => {
-    setPage(value + 1);
+    dispatch(setCurrentPage(value + 1));
+  };
+  const handleClearSearch = () => {
+    setSearchTitle("");
   };
 
   return (
@@ -29,6 +58,7 @@ const Home = () => {
         id="search"
         className=""
         onSearch={handleSearch}
+        onClear={handleClearSearch}
         title={searchTitle}
       />
       <Paginator
@@ -38,8 +68,9 @@ const Home = () => {
 
       <div className="mt-4  h-full min-h-svh w-full  gap-8 sm:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 auto-rows-auto justify-center">
         <AnimeList
-          animeTitle={debouncedSearchTitle}
-          currentPage={page}
+          animeList={animeList}
+          isLoading={isLoading}
+          isFetching={isFetching}
         ></AnimeList>
       </div>
 
