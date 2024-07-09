@@ -31,7 +31,7 @@ const AnimeCard = ({ anime }) => {
             genreList.map((genre) => (
               <div
                 key={genre["mal_id"]}
-                className="genre text-xs px-2 h-4 font-default bg-gray-500 rounded-lg text-white"
+                className="genre text-xs px-2  h-4 font-default bg-gray-500 rounded-lg text-white leading-snug"
               >
                 {genre["name"]}
               </div>
