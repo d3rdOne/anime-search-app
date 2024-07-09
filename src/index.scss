@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*,
+*::after,
+*::before {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	--bg-color: #eee;
+	--fg-color: #262626;
+}
+body.dark {
+	--bg-color: #262626;
+	--fg-color: #eee;
+}
+
+body {
+	--button-dimension: 2.5rem;
+	--sun-animation-duration: 800ms;
+	--core-animation-duration: 675ms;
+  --sun-animation-curve: cubic-bezier(0.43, 0.06, 0, 1.21);
+  --core-animation-curve: cubic-bezier(0.4, 0, 0.2, 1);
+	transition: background-color var(--sun-animation-duration) ease-in-out;
+}
+
+.toggle-button {
+	position: relative;
+	outline: none;
+	border: none;
+	border-radius: 50%;
+	margin-right: 1rem;
+	width: var(--button-dimension);
+	height: var(--button-dimension);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.sun {
+		border-radius: 50%;
+		position: relative;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: transform var(--sun-animation-duration)
+			var(--sun-animation-curve);
+
+		&::before {
+			z-index: 1;
+			content: "";
+			position: absolute;
+			width: 50%;
+			height: 50%;
+			background-color: var(--fg-color);
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		&::after {
+			z-index: 2;
+			content: "";
+			position: absolute;
+			width: 50%;
+			height: 50%;
+			background-color: var(--fg-color);
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%) rotate(45deg);
+		}
+	}
+
+	&:active {
+		background-color: #88888820;
+	}
+
+	.core {
+		z-index: 3;
+		position: absolute;
+		width: 38%;
+		height: 38%;
+		border-radius: 50%;
+		background-color: var(--bg-color);
+
+		&::before {
+			z-index: 4;
+			content: "";
+			position: absolute;
+			border-radius: 50%;
+			width: 70%;
+			height: 70%;
+			background-color: var(--fg-color);
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			-webkit-transform: translate(-50%, -50%);
+			transition: transform var(--core-animation-duration) var(--core-animation-curve),
+				width var(--core-animation-duration) var(--core-animation-curve),
+				height var(--core-animation-duration) var(--core-animation-curve);
+			-webkit-transition: -webkit-transform var(--core-animation-duration) var(--core-animation-curve);
+		}
+	}
+}
+
+body.dark {
+	.toggle-button {
+		.sun {
+			transform: rotate(0deg);
+		}
+		.core {
+			&::before {
+				transform: translate(-50%, -50%);
+				width: 70%;
+				height: 70%;
+			}
+		}
+	}
+}
+body {
+	.toggle-button {
+		.sun {
+			transform: rotate(-270deg);
+		}
+		.core {
+			&::before {
+				transform: translate(-77%, -62%);
+				width: 92%;
+				height: 92%;
+			}
+		}
+	}
+}
