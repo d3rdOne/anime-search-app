@@ -138,3 +138,11 @@ body {
 		}
 	}
 }
+
+.scroll-to-top {
+	&.custom {
+		@apply bg-gray-50/90 rounded-none animate-bounce
+		 border-2 border-black
+	}
+
+}

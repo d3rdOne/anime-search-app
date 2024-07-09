@@ -8,6 +8,8 @@ import { useDebounce } from "../customHooks/useDebounce";
 import Paginator from "../components/Paginator";
 import { saveTitle, setCurrentPage, setPageCount } from "../slice/animeSlice";
 import { useLazyGetAnimeListQuery } from "../slice/animeAPISlice";
+import ScrollToTop from "react-scroll-to-top";
+import ScrollTop from "../components/ScrollTop";
 
 const Home = () => {
   const DEBOUNCE_TIME_MS = 600;
@@ -61,6 +63,7 @@ const Home = () => {
         onClear={handleClearSearch}
         title={searchTitle}
       />
+      <ScrollToTop smooth className="custom" component={<ScrollTop />} />
       <Paginator
         containerClassName="mt-10 mb-8"
         onSelectPage={handleSelectPage}
