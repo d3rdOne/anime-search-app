@@ -17,6 +17,9 @@ const Details = () => {
   const [details, setDetails] = useState(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  useEffect(() => {
     if (data?.data) {
       setDetails(data.data);
     }
@@ -114,14 +117,21 @@ const Details = () => {
                       </p>
                     </Accordion>
 
-                    {/* Related Entries */}
-                    <Accordion title="Images">
+                    {/* Images */}
+                    <Accordion
+                      title="Images"
+                      className={
+                        " text-lg tracking-wider w-full py-1 text-black dark:text-gray-50 mt-4"
+                      }
+                    >
                       <AnimeImages id={anime.id}></AnimeImages>
                     </Accordion>
+
+                    {/* Related Entries */}
                     <Accordion
                       title="Related Entries"
                       className={
-                        "font-medium text-lg tracking-wider w-full py-1 text-black dark:text-gray-50 mt-4"
+                        " text-lg tracking-wider w-full py-1 text-black dark:text-gray-50 mt-4"
                       }
                     >
                       <RelatedEntries animeId={anime.id} />
