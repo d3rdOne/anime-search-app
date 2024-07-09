@@ -6,6 +6,8 @@ import Accordion from "../components/Accordion";
 import { useGetAnimeDetailQuery } from "../slice/animeAPISlice";
 import { isNull } from "lodash";
 import AnimeImages from "../components/AnimeImages";
+import ScrollToTop from "react-scroll-to-top";
+import ScrollTop from "../components/ScrollTop";
 
 const Details = () => {
   const STAR_RATING_COUNT = 5;
@@ -34,7 +36,8 @@ const Details = () => {
     });
   };
   return (
-    <div className="w-full  h-full  bg-gray-100 dark:bg-indigo-950 relative">
+    <div className="w-full  h-full  sm:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl bg-gray-100 dark:bg-indigo-950 relative">
+      <ScrollToTop smooth className="custom" component={<ScrollTop />} />
       <div className="h-full sm:max-w-screen-xl mx-auto  bg-gray-100 dark:bg-indigo-950  text-black dark:text-gray-100 relative">
         <div className=" text-black dark:text-gray-50 tracking-wide text-2xl">
           {/* <Link to="/" className="font-semibold">
