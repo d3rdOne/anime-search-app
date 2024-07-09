@@ -17,7 +17,7 @@ const Paginator = ({ containerClassName, onSelectPage }) => {
             onPageChange={(event) => onSelectPage(event.selected)}
             nextLabel="NEXT"
             previousLabel="PREV"
-            containerClassName={`${containerClassName} w-full gap-0 sm:gap-2 flex flew-wrap justify-center text-xs sm:text-sm tracking-wider`}
+            containerClassName={`${containerClassName} w-full gap-0 sm:gap-2 flex flex-wrap justify-center text-xs sm:text-sm tracking-wider`}
             previousClassName=" rounded-sm border-[1px] py-1 px-2 border-black/50 bg-gray-50  hover:bg-gray-100 dark:bg-red-700 dark:border-gray-red dark:hover:bg-red-600"
             nextClassName="rounded-sm border-[1px] py-1 px-2 border-black/50 bg-gray-50 hover:bg-gray-100 dark:bg-red-700 dark:border-gray-red dark:hover:bg-red-600"
             pageClassName="rounded-sm border-[1px] py-1 px-2 border-black/50 bg-gray-50  hover:bg-gray-100 dark:bg-red-700 dark:border-gray-red dark:hover:bg-red-600"
