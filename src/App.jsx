@@ -12,7 +12,7 @@ function App() {
     <>
       <motion.div
         layout
-        className="h-full min-h-lvh px-4 flex flex-col items-center  font-sans bg-gray-100 text-gray-950 dark:bg-indigo-950 dark:text-gray-50 box-border"
+        className="h-full min-h-lvh px-4 flex flex-col items-center  font-sans bg-gray-100 text-gray-950 dark:bg-gray-800 dark:text-gray-50 box-border trans-all-500"
       >
         <BrowserRouter>
           <Header />

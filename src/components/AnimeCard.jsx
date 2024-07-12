@@ -16,7 +16,7 @@ const AnimeCard = ({ anime }) => {
             src={anime["images"]["jpg"]["large_image_url"]}
             alt={anime["title"]}
             loading="lazy"
-            className="w-full h-80 object-cover rounded-lg shadow-lg absolute border-1px border-blue-50 dark:shadow-lg"
+            className="w-full h-80 object-cover rounded-lg shadow-lg absolute border-1px border-blue-50 dark:shadow-lg text-center bg-gray-700 trans-all-500"
           />
           <p className="absolute top-1 left-1 bg-red-500 px-3 rounded-sm rounded-tl-lg rounded-br-lg text-white text-md">
             {anime["type"]}
@@ -31,7 +31,7 @@ const AnimeCard = ({ anime }) => {
             genreList.map((genre) => (
               <div
                 key={genre["mal_id"]}
-                className="genre text-xs px-2  h-4 font-default bg-gray-500 rounded-lg text-white leading-snug"
+                className="genre text-xs px-2 h-5 font-default bg-slate-500 dark:bg-teal-700 rounded-lg text-white leading-normal"
               >
                 {genre["name"]}
               </div>

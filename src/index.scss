@@ -141,8 +141,24 @@ body {
 
 .scroll-to-top {
 	&.custom {
-		@apply bg-gray-50/90 rounded-none animate-bounce
+		@apply bg-gray-50/90 rounded-md animate-bounce
 		 border-2 border-black
 	}
 
+}
+
+.trans-all-100 {
+	@apply transition-all duration-100;
+}
+
+.trans-all-300 {
+	@apply transition-all duration-300;
+}
+
+.trans-all-500 {
+	@apply transition-all duration-500;
+}
+
+.trans-all-700 {
+	@apply transition-all duration-700;
 }

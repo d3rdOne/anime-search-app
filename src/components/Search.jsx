@@ -20,7 +20,7 @@ const Search = ({ title, onSearch, onClear, className }) => {
         placeholder="Type anime title"
         className={
           className +
-          ` px-8 py-4 border-gray-600 border-2 border-t-0 border-l-0 border-r-0 w-full outline-0 outline-gray-400 shadow-lg sm:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl text-gray-900 font-default text-xl`
+          ` px-8 py-4 border-gray-600 w-full outline-0 outline-gray-400 shadow-lg ring-1 ring-gray-300  dark:shadow-transparent sm:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl text-gray-900 font-default text-xl rounded-lg`
         }
       />
       <div className="absolute sm:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl w-full">
