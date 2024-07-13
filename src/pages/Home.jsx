@@ -78,7 +78,7 @@ const Home = () => {
       </div>
 
       <Paginator
-        containerClassName={"m-8"}
+        containerClassName={"mt-8"}
         onSelectPage={handleSelectPage}
       ></Paginator>
     </>

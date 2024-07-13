@@ -8,7 +8,7 @@ const Paginator = ({ containerClassName, onSelectPage }) => {
 
   return (
     <>
-      <div className="w-full sm:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl">
+      <div className="w-full sm:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl transition-all duration-300">
         {pageCount > 0 && (
           <ReactPaginate
             pageCount={pageCount}
@@ -17,7 +17,7 @@ const Paginator = ({ containerClassName, onSelectPage }) => {
             onPageChange={(event) => onSelectPage(event.selected)}
             nextLabel="NEXT"
             previousLabel="PREV"
-            containerClassName={`${containerClassName} w-full gap-0 sm:gap-2 flex flex-wrap justify-center text-xs sm:text-sm tracking-wider`}
+            containerClassName={`${containerClassName} w-full gap-0 sm:gap-2 flex flex-wrap justify-center text-xs sm:text-sm tracking-wider transition-all duration-700`}
             previousClassName=" rounded-md shadow-md border-[1px] py-1 px-2 border-black/50 bg-gray-50  hover:bg-gray-100 dark:bg-red-700 dark:border-gray-red dark:hover:bg-red-600"
             nextClassName="rounded-md shadow-md border-[1px] py-1 px-2 border-black/50 bg-gray-50 hover:bg-gray-100 dark:bg-red-700 dark:border-gray-red dark:hover:bg-red-600"
             pageClassName="rounded-md shadow-md border-[1px] py-1 px-2 border-black/50 bg-gray-50  hover:bg-gray-100 dark:bg-red-700 dark:border-gray-red dark:hover:bg-red-600 "
