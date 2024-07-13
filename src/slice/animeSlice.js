@@ -2,10 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   title: '',
-  theme: 'dark',
+  theme: localStorage['theme'],
   currentPage: 1,
   pageCount: 0
 }
+
 
 export const animeSearchSlice = createSlice({
   name:'animeSearch',
@@ -16,6 +17,7 @@ export const animeSearchSlice = createSlice({
     },
     setTheme: (state, action) => {
       state.theme = action.payload
+      localStorage.setItem('theme', action.payload);
     },
     setPageCount: (state, action) => {
       state.pageCount = action.payload
