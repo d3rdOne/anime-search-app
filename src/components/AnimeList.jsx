@@ -1,16 +1,15 @@
 /* eslint-disable react/prop-types */
-import { memo } from "react";
-import AnimeCard from "./AnimeCard";
+// import { memo } from "react";
+import AnimeCard, { AnimeCardSkeleton } from "./AnimeCard";
 
 const AnimeList = ({ animeList, isLoading, isFetching }) => {
   return (
     <>
       {(isLoading || isFetching) && (
         <>
-          {" "}
-          <div className="text-3xl text-gray-950 dark:text-gray-50 col-span-full text-center">
-            <div className="mt-20 animate-bounce">Loading...</div>
-          </div>
+          {Array.from({ length: 10 }, (_, i) => (
+            <AnimeCardSkeleton key={i} />
+          ))}
         </>
       )}
       {animeList?.data?.length == 0 && !isFetching && (
@@ -32,4 +31,4 @@ const AnimeList = ({ animeList, isLoading, isFetching }) => {
   );
 };
 
-export default memo(AnimeList);
+export default AnimeList;

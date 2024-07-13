@@ -1,4 +1,23 @@
+import Skeleton from "react-loading-skeleton";
 import { Link } from "react-router-dom";
+
+export const AnimeCardSkeleton = () => {
+  return (
+    <div className="w-full  scroll-smooth transition-all">
+      <div className="flex flex-col">
+        <Skeleton className="w-full h-80 rounded-lg" />
+        <div className="m-2 flex flex-wrap gap-2">
+          <Skeleton className="px-2 h-5 font-default w-12 rounded-xl" />
+          <Skeleton className="px-2 h-5 font-default w-12 rounded-xl" />
+          <Skeleton className="px-2 h-5 font-default w-12 rounded-xl" />
+        </div>
+      </div>
+      <div className="mt-2">
+        <Skeleton className="h-8 w-full px-2 rounded-xl"></Skeleton>
+      </div>
+    </div>
+  );
+};
 
 /* eslint-disable react/prop-types */
 const AnimeCard = ({ anime }) => {
@@ -16,7 +35,7 @@ const AnimeCard = ({ anime }) => {
             src={anime["images"]["jpg"]["large_image_url"]}
             alt={anime["title"]}
             loading="lazy"
-            className="w-full h-80 object-cover rounded-lg shadow-lg absolute border-1px border-blue-50 dark:shadow-lg text-center bg-gray-700 trans-all-500"
+            className="w-full h-80 object-cover rounded-lg shadow-lg absolute border-1px border-blue-50 dark:shadow-lg text-center bg-gray-100 dark:bg-gray-700 trans-all-500"
           />
           <p className="absolute top-1 left-1 bg-red-500 px-3 rounded-sm rounded-tl-lg rounded-br-lg text-white text-md">
             {anime["type"]}

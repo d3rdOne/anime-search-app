@@ -1,5 +1,4 @@
 import { Children, useState } from "react";
-import { motion } from "framer-motion";
 
 // eslint-disable-next-line react/prop-types
 const Accordion = ({ className, title, children }) => {
@@ -16,10 +15,9 @@ const Accordion = ({ className, title, children }) => {
       >
         <p>{title}</p>
       </button>
-      <motion.div
-        layout
-        className={`content ${
-          isOpen ? "h-fit overflow-auto" : "h-0 overflow-hidden "
+      <div
+        className={`content transition-all duration-500 ${
+          isOpen ? "opacity-100" : "opacity-0 h-0 duration-0"
         }`}
       >
         {childArray.length > 0 &&
@@ -28,7 +26,7 @@ const Accordion = ({ className, title, children }) => {
               {child}
             </div>
           ))}
-      </motion.div>
+      </div>
     </div>
   );
 };

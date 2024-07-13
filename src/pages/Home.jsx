@@ -69,7 +69,7 @@ const Home = () => {
         onSelectPage={handleSelectPage}
       ></Paginator>
 
-      <div className="mt-4  h-full min-h-svh w-full transition-all duration-500  gap-8 sm:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 auto-rows-auto justify-center">
+      <div className="mt-4  h-full min-h-svh w-full transition-all duration-500  gap-8 sm:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 auto-rows-min justify-center">
         <AnimeList
           animeList={animeList}
           isLoading={isLoading}
