@@ -10,6 +10,7 @@ import { saveTitle, setCurrentPage, setPageCount } from "../slice/animeSlice";
 import { useLazyGetAnimeListQuery } from "../slice/animeAPISlice";
 import ScrollToTop from "react-scroll-to-top";
 import ScrollTop from "../components/ScrollTop";
+import { Analytics } from "@vercel/analytics/react";
 
 const Home = () => {
   const DEBOUNCE_TIME_MS = 600;
@@ -56,6 +57,7 @@ const Home = () => {
 
   return (
     <>
+      <Analytics />
       <Search
         id="search"
         className=""
